@@ -1,38 +1,32 @@
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class LongestWord {
+class ShortestWord {
 
-    public static void main(String[] args) {
-        new LongestWord().tests();
-    }
-
-    private String longestWord(String input) {
+    private String shortestWord(String input) {
         if(Objects.isNull(input)|| input.trim().isEmpty()) {
             return "Empty input";
         }
         String maxLength = Arrays.stream(input.split(" "))
-                .max(Comparator.comparingInt(String::length)).get();
+                .min(Comparator.comparingInt(String::length)).get();
 
         return String.format("%s, %d", maxLength, maxLength.length());
     }
 
-    private void tests() {
+    public void tests() {
         String case1 = null;
         String case2 = "    ";
         String case3 = "The cow jumped over the moon";
         String case4 = "The cow on the moo";
 
-        boolean result = assertThat(longestWord(case1), "Empty input") &&
-                assertThat(longestWord(case2), "Empty input") &&
-                assertThat(longestWord(case3), "jumped, 6") &&
-                assertThat(longestWord(case4), "The, 3");
+        boolean result = assertThat(shortestWord(case1), "Empty input") &&
+                assertThat(shortestWord(case2), "Empty input") &&
+                assertThat(shortestWord(case3), "The, 3") &&
+                assertThat(shortestWord(case4), "on, 2");
 
         if(result){
-            System.out.println("All tests passed");
+            System.out.println("All tests shortest word passed");
         }
     }
 
